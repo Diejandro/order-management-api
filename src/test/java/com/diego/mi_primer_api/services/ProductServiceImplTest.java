@@ -40,7 +40,7 @@ public class ProductServiceImplTest {
 
         assertTrue(result.isPresent(), "El resultado debe contener el producto");
         assertEquals("productTest", result.get().getProductName(), "El nombre debe coincidir con el del setup");
-        assertEquals("LPT-1234-10", result.get().getProductSKU(), "El sku debe coincidir con el del setup");
+        assertEquals("LPT-1234-10", result.get().getProductSku(), "El sku debe coincidir con el del setup");
 
         verify(productRepository).findById(1L);
     }
@@ -76,10 +76,10 @@ public class ProductServiceImplTest {
 
     @Test
     void save_shouldThrowException_WhenSkuAlreadyExists() {
-        String skuExistente = product.getProductSKU();
-        product.setProductSKU(skuExistente);
+        String skuExistente = product.getProductSku();
+        product.setProductSku(skuExistente);
 
-        when(productRepository.existsBySku(skuExistente)).thenReturn(true);
+        when(productRepository.existsByProductSku(skuExistente)).thenReturn(true);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             productService.save(product);

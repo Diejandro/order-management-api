@@ -30,8 +30,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public Product save(Product product) {
-        if(productRepository.existsBySku(product.getProductSKU())){
-            throw new RuntimeException("Ya existe un producto con el código: " + product.getProductSKU());
+        if(productRepository.existsByProductSku(product.getProductSku())){
+            throw new RuntimeException("Ya existe un producto con el código: " + product.getProductSku());
         }
         return productRepository.save(product);
     }
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
             productDb.setProductName(product.getProductName());
             productDb.setProductDescription(product.getProductDescription());
             productDb.setProductPrice(product.getProductPrice());
-            productDb.setProductSKU(product.getProductSKU());
+            productDb.setProductSku(product.getProductSku());
             return productRepository.save(productDb);
         });
     }

@@ -51,7 +51,7 @@ public class ProductControllerTest {
         Product body = (Product) response.getBody();
         assertThat(body).isNotNull();
         assertThat(body.getProductName()).isEqualTo("productTest1");
-        assertThat(body.getProductSKU()).isEqualTo("LPT-1234-10");
+        assertThat(body.getProductSku()).isEqualTo("LPT-1234-10");
 
         verify(productService).findById(1L);
     }
@@ -105,7 +105,7 @@ public class ProductControllerTest {
         assertThat(body).isNotNull();
         assertThat(body.getId()).isEqualTo(1L);
         assertThat(body.getProductName()).isEqualTo("productTest1");
-        assertThat(body.getProductSKU()).isEqualTo("LPT-1234-10");
+        assertThat(body.getProductSku()).isEqualTo("LPT-1234-10");
 
         verify(productService).save(any(Product.class));
     }

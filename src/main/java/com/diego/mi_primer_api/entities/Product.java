@@ -33,7 +33,7 @@ public class Product {
     @NotBlank(message = "{NoBlank.product.productSKU}")
     @Pattern(regexp = "^[A-Z]{3}-[A-Z0-9]{4,5}-[0-9]{2}$", message = "{Pattern.product.productSKU}")
     @Column(name = "sku_code", unique = true, nullable = false)
-    private String productSKU;
+    private String productSku;
 
     @ManyToMany(mappedBy = "products")
     private List<Order> orders;
@@ -42,9 +42,9 @@ public class Product {
         this.orders = new ArrayList<>();
     }
 
-    public Product(String productSKU, String productName, String productDescription, BigDecimal productPrice) {
+    public Product(String productSku, String productName, String productDescription, BigDecimal productPrice) {
         this();
-        this.productSKU = productSKU;
+        this.productSku = productSku;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
@@ -58,12 +58,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getProductSKU() {
-        return productSKU;
+    public String getProductSku() {
+        return productSku;
     }
 
-    public void setProductSKU(String productSKU) {
-        this.productSKU = productSKU;
+    public void setProductSku(String productSku) {
+        this.productSku = productSku;
     }
 
     public String getProductName() {
@@ -102,11 +102,11 @@ public class Product {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(productSKU, product.productSKU);
+        return Objects.equals(productSku, product.productSku);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(productSKU);
+        return Objects.hashCode(productSku);
     }
 }
