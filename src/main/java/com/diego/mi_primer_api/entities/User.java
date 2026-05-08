@@ -22,6 +22,7 @@ public class User {
     private String username;
 
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 
@@ -40,6 +41,9 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"),
     uniqueConstraints ={@UniqueConstraint(columnNames = {"user_id", "role_id"})})
     private Set<Role> roles;
+
+    @Column(name = "enabled")
+    private boolean enabled;
 
     public Long getId() {
         return id;
@@ -87,6 +91,14 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
