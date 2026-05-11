@@ -24,7 +24,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return ValidationUtils.validationError(bindingResult);
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));

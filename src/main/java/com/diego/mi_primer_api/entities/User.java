@@ -1,11 +1,13 @@
 package com.diego.mi_primer_api.entities;
 
+import com.diego.mi_primer_api.utils.ExistsByUsername;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,11 +19,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @ExistsByUsername
+    @NotBlank(message = "{NotBlank.user.username}")
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.user.password}")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
@@ -40,7 +43,7 @@ public class User {
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"),
     uniqueConstraints ={@UniqueConstraint(columnNames = {"user_id", "role_id"})})
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Column(name = "enabled")
     private boolean enabled;
