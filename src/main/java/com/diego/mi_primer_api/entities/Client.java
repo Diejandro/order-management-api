@@ -30,7 +30,7 @@ public class Client {
 
     @NotBlank(message = "{NotBlank.client.clientNumId}")
     @Pattern(regexp = "^[0-9]{8}[a-zA-Z]$", message = "{Pattern.client.clientNumId}")
-    @Column(name = "client_num_id", unique = true, nullable = false)
+    @Column(name = "client_num_id", nullable = false)
     private String clientNumId;
 
     @OneToMany(mappedBy="client", cascade = CascadeType.ALL, orphanRemoval = true)
